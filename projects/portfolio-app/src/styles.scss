@@ -1,38 +1,176 @@
 
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
+@use './theme-colors' as my-theme;
+
+@include mat.strong-focus-indicators((border-width: 2px,
+    border-style: solid,
+  ));
+
 
 html {
-  height: 100%;
   @include mat.theme((
     color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
+      primary: my-theme.$primary-palette,
+      tertiary: my-theme.$tertiary-palette,
     ),
     typography: Roboto,
     density: 0,
   ));
 }
 
-body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
 
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
+$background-color: mat.get-theme-color(my-theme.$light-theme, primary, 98);
+$h2-color: mat.get-theme-color(my-theme.$light-theme, primary, 35);
+$h3-color: mat.get-theme-color(my-theme.$light-theme, primary, 25);
 
-  // Reset the user agent margin.
-  margin: 0;
-  height: 100%;
+html, body { max-height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.econ-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  background-color: $background-color;
+  margin: 5px;
+  padding: 0px;
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+  box-shadow: 2px 4px 4px rgba(211, 211, 211, 0.877);
 }
-/* You can add global styles to this file, and also import other style files */
+
+.econ-title {
+  flex: 1 1 100%;
+  background-color: mat.get-theme-color(my-theme.$light-theme, primary, 35);
+  color: mat.get-theme-color(my-theme.$light-theme, primary, 98);
+  font-weight: 400;
+  font-size: 24px;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  box-shadow: 2px 4px 4px rgba(211, 211, 211, 0.877);
+
+}
+
+.econ-heading-medium {
+  color: $h2-color;
+  font-weight: 400;
+  margin: 5px 0px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.item-narrative {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 40%;
+  padding: 5px;
+}
+
+.item-chart {
+  flex: 1 1 60%;
+  padding: 0px;
+
+}
+
+.item-control {
+  flex: 1 1 100%;
+  padding-left: 15px;
+}
+
+.econ-control-grp-column {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  gap: 5px;
+}
+
+.econ-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 10px 0px;
+  padding: 0px 0px 0px 25px;
+
+  li {
+    line-height: 1.25em;
+
+  }
+}
+
+.econ-message {
+  margin: 10px 3px 0px 5px;
+  padding: 7px;
+  border: 1px solid $h2-color;
+  border-radius: 5px;
+  font-size: 1em;
+
+  h3 {
+    margin-top: -15px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    color: $h3-color;
+    background-color: $background-color;
+    width: 80px;
+    text-align: center;
+    font-size: .95rem;
+    font-weight: 400;
+  }
+
+  p {
+    margin-top: 0px;
+    margin-bottom: 2px;
+  }
+
+}
+
+// Small screen and mobile
+
+@media all and (max-width: 800px) {
+  .wrapper {
+    display: flex;
+    flex-flow: column-reverse;
+  }
+
+  .item-chart {
+    //  @include flex(1 0 100%);
+    flex: 1 0 100%;
+  }
+
+  .item-narative {
+    display: flex;
+    flex-direction: column-reverse;
+  //  flex: 0 0 100%;
+  }
+  .item-control {
+    flex: 1 1 45%;
+    padding-left: 0px;
+  }
+  
+  .econ-control-grp-column {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+}
+
+.cdk-live-announcer-element {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}

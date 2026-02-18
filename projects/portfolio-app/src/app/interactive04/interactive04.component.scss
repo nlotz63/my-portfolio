@@ -1,0 +1,93 @@
+::ng-deep .econ-control-grp-column econ-slider label,
+::ng-deep .econ-control-grp-column econ-slider span {
+  min-width: 65px;
+  display: inline-block;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.econ-form-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  align-items: start;
+  row-gap: 40px; // Adds extra vertical space between rows
+}
+
+.econ-form-field {
+  width: 100%;
+}
+
+.econ-form-container > button {
+  grid-column: 1 / -1; /* span both columns */
+  justify-self: start;
+  width: 80%;
+  margin: auto;
+}
+
+.econ-form-container > .allocation-control {
+  grid-column: 1 / -1; /* span both columns */
+  justify-self: start;
+  width: 95%;
+  margin: auto;
+}
+// Add to your component styles
+.clamped {
+  .mat-mdc-form-field-outline {
+    color: #ff9800 !important;
+  }
+  
+  .mat-mdc-form-field-hint {
+    color: #ff9800;
+    font-weight: 500;
+  }
+}
+
+.info-snackbar {
+  background-color: #2196f3;
+  color: white;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 600px) {
+  .econ-form-container {
+    grid-template-columns: 1fr;
+  }
+  .econ-form-container > button {
+    grid-column: 1;
+  }
+}
+
+.allocation-control {
+  .allocation-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    
+    .stock-label {
+      min-width: 60px;
+      font-weight: 500;
+    }
+    
+    .allocation-bar {
+      flex: 1;
+      height: 24px;
+      display: flex;
+      border: 1.5px solid black;
+      border-radius: 4px;
+      overflow: hidden;
+      
+      .stock-a-portion {
+        background-color: #2196f3;
+        transition: width 0.3s ease;
+        border-right: 1.5px solid black;
+      }
+      
+      .stock-b-portion {
+        background-color: #ff9800;
+        transition: width 0.3s ease;
+      }
+    }
+  }
+}

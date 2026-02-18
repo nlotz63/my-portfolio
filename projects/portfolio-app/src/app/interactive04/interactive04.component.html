@@ -1,0 +1,70 @@
+<div class="econ-container">
+    <h1 class="econ-title">{{ title() }}</h1>
+    <div class="wrapper">
+        <div class="item-narrative">
+            <h2 class="econ-heading-medium">Settings:</h2>
+            <!--             <ul class="econ-list">
+                <li>
+                    The first slider sets the correlation between the two stocks. Use the slider to change the shape of
+                    the curve.
+                </li>
+                <li>
+                    The second slider sets the share of the portfolio allocated to each stock. Use the slider to move
+                    the allocation point along the curve.
+                </li>
+            </ul>
+ -->
+            <div class="econ-control-grp-column">
+            </div>
+            <div class="econ-form-container">
+                <!-- Replace sliders for expected returns and standard deviation with MatInput -->
+                <mat-form-field class="econ-form-field" appearance="outline">
+                    <mat-label>Expected Return A</mat-label>
+                    <input matInput type="text" #val1 [min]="0" [max]=".3" [step]="0.01"
+                        value="{{expectedReturnA() | percent: '0.1-1'}}"
+                        (change)="processInputs(val1.value, 'expectedReturnA', val1)">
+                        <mat-hint>Enter a value between 0 and 30%</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="econ-form-field" appearance="outline">
+                    <mat-label>Expected Return B</mat-label>
+                    <input matInput type="text" #val2 [min]="0" [max]=".3" [step]="0.01"
+                        value="{{expectedReturnB() | percent: '0.1-1'}}"
+                        (change)="processInputs(val2.value, 'expectedReturnB', val2)">
+                    <mat-hint>Enter a value between 0 and 30%</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="econ-form-field" appearance="outline">
+                    <mat-label>Standard deviation A</mat-label>
+                    <input matInput type="text" #val3 [min]="0" [max]=".6" [step]="0.01"
+                        value="{{stdDevA() | percent: '0.1-1'}}" (change)="processInputs(val3.value, 'stdDevA', val3)">
+                    <mat-hint>Enter a value between 0 and 60%</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="econ-form-field" appearance="outline">
+                    <mat-label>Standard deviation B</mat-label>
+                    <input matInput type="text" #val4 [min]="0" [max]=".6" [step]="0.01"
+                        value="{{stdDevB() | percent: '0.1-1'}}" (change)="processInputs(val4.value, 'stdDevB', val4)">
+                    <mat-hint>Enter a value between 0 and 60%</mat-hint>
+                </mat-form-field>
+                <div class="allocation-control">
+                    <div class="allocation-display">
+                        <span class="stock-label">Stock A</span>
+                        <span class="allocation-bar">
+                            <span class="stock-a-portion" [style.width.%]="shareA() * 100"></span>
+                            <span class="stock-b-portion" [style.width.%]="(1 - shareA()) * 100"></span>
+                        </span>
+                        <span class="stock-label">Stock B</span>
+                    </div>
+                    <econ-slider label="Portfolio Weights" showValue="false"
+                        displayValue="{{ shareA() | percent: '0.0-0'}} A / {{(1 - shareA()) | percent: '0.0-0'}} B"
+                        [min]="0" [max]="1" [step]="0.05" [(value)]="shareA">
+                    </econ-slider>
+                                    <econ-slider label="Correlation" showValue="false" displayValue="{{correlation() | number: '0.2-2'}} "
+                    [min]="-1" [max]="1" [step]="0.01" [(value)]="correlation"></econ-slider>
+
+                </div>
+
+                <button mat-raised-button color="primary" (click)="reset()">Reset</button>
+            </div>
+        </div>
+        <div class="item-chart" id="chart"></div>
+    </div>
+</div>
