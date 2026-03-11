@@ -8,6 +8,9 @@ export const routes: Routes = [
         path: 'interactive04', loadComponent: () => import( './interactive04/interactive04.component').then(m => m.Interactive04Component), title: 'Example 04'
     },
     {
-        path: '', redirectTo: 'interactive04', pathMatch: 'full'
+        path: 'yieldcurve', loadComponent: () => import('./interactive16/interactive16.component').then(m => m.Interactive16Component), title: '   Yield Curve'
+    },
+    {
+        path: '', redirectTo: 'yieldcurve', pathMatch: 'full'
     }
 ];

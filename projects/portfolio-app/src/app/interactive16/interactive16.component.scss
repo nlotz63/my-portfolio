@@ -1,0 +1,42 @@
+.econ-control-grp-column {
+    margin: 20px 0px 10px 15px;
+
+    mat-form-field {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+
+    .item-button {
+        min-width: 45px;
+    }
+}
+
+@media all and (max-width: 800px) {
+    .econ-control-grp-column {
+        flex-direction: row;
+        align-items: center;
+
+        mat-form-field {
+            width: 50%;
+            margin: auto;
+        }
+
+    }
+}
+
+.econ-radio-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+
+    mat-radio-button {
+        margin: 0 15px;
+    }
+}

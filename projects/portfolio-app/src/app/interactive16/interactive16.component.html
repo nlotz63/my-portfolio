@@ -1,0 +1,60 @@
+<div class="econ-container">
+    <h1 class="econ-title">{{ title() }}</h1>
+    <div class="wrapper">
+        <div class="item-narrative">
+            <h2 class="econ-heading-medium">Overview</h2>
+            <ul class="econ-list">
+                <li>
+                    The yield curve illustrates the relationship between yield to maturity and the time to maturity for
+                    debt securities.
+                </li>
+                <li>
+                    The curve typically slopes upward, indicating that longer-term debt securities have higher yields
+                    than shorter-term ones.
+                </li>
+                <li>
+                    The yield curve can be used as a predictor of future interest rate changes and economic activity.
+                </li>
+            </ul>
+            <mat-radio-group (change)="option.set($event.value)" class="econ-radio-group" aria-label="Select an option">
+                <mat-radio-button class="item-radio" [value]="0" [checked]="option() === 0">Select
+                    Dates</mat-radio-button>
+                <mat-radio-button class="item-radio" [value]="1" [checked]="option() === 1">Animate</mat-radio-button>
+            </mat-radio-group>
+
+            @if(option() === 0) {
+            <div class="econ-control-grp-column">
+                <mat-form-field class="item-date" appearance="outline">
+                    <mat-label>Choose a date</mat-label>
+                    <input title="date" matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="picker"
+                        (dateChange)="selectedDate.set($event.value!)" [value]="selectedDate()">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <button class="item-button" mat-raised-button (click)="reset()">Clear Yield Curves</button>
+
+            </div>
+            } @else if (option() === 1) {
+            <div class="econ-control-grp-column">
+                <econ-slider label="Start Date" showValue="false"
+                    displayValue="{{ yieldCurves[startDatePointer()].date | date }}" [min]="minDatePointer()"
+                    [max]="maxDatePointer()" [step]="1" [(value)]="startDatePointer"></econ-slider>
+
+                <div class="button-group">
+                    <button class="item-button" mat-raised-button matTooltip="Play animation"
+                        [disabled]="playButtonDisabled()"
+                        (click)="playAnimation()"><mat-icon>play_arrow</mat-icon></button>
+                    <button class="item-button" mat-raised-button matTooltip="Pause animation"
+                        [disabled]="pauseButtonDisabled()"
+                        (click)="pauseAnimation()"><mat-icon>pause</mat-icon></button>
+                    <button class="item-button" mat-raised-button matTooltip="Reset animation"
+                        [disabled]="resetButtonDisabled()"
+                        (click)="resetAnimation()"><mat-icon>replay</mat-icon></button>
+                </div>
+            </div> }
+
+
+        </div>
+        <div class="item-chart" id="chart"></div>
+    </div>
+</div>
